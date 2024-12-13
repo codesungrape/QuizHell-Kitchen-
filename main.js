@@ -65,6 +65,7 @@ function changeQuestion() {
   num = num + 1;
   nextButton.disabled = true
   nextButton.style.opacity = 0
+  changeImage.src = ""
   nextQuestion();
 }
 
