@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>    
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
     <sections id="headerContainer">
@@ -14,14 +15,20 @@
     </sections>
     <section id="gameContainer">
         <p id="Question">Question retuned from API</p>
-        <button id="APIrender">CLICK ME</button>
+        <button id="APIrender">START</button>
 
         <p id="feedbackResponse"></p>
-        <button  id="nextQuestion">NEXT QUESTION</button>
-        <button id="trueButton">True</button>
-        <button id="falseButton">False</button>
-
         
+
+        <div>        
+            <div>
+                <button id="trueButton">True</button>
+                <button id="falseButton">False</button>
+            </div>
+            <button  id="nextQuestion" disabled = "true" style="opacity: 0;" >NEXT QUESTION</button>
+        </div>
+
+        <div id="userScore">Score = 0 out of 1 </div>
 
     </section>
 
