@@ -10,6 +10,8 @@ let feedbackResponse;
 let score = 0;
 let userScore = document.getElementById("userScore")
 let questionNumTracker = 1; 
+let image = ["./faislel well done.png", "./faislel wrong.png" ]
+let changeImage = document.getElementById("faisalImage")
 
 
 async function getQuestions() {
@@ -69,13 +71,15 @@ function changeQuestion() {
 function compareBool() {
   feedbackResponse = document.getElementById("feedbackResponse");
   if (correctAnswer === userInput) {
-    feedbackResponse.textContent = "well done";
+    feedbackResponse.textContent = "You get a point!!!";
     score++
     userScore.textContent = `Score = ${score} out of ${questionNumTracker}`
+    changeImage.src = image[0]
+
   } else {
-    console.log(`was false the correct answer is ${correctAnswer}`);
     feedbackResponse.textContent = `Sorry the correct answer is ${correctAnswer}`;
       userScore.textContent = `Score = ${score} out of ${questionNumTracker}`
+      changeImage.src = image[1]
   }
   nextButton.disabled = false
   nextButton.style.opacity = 1 
