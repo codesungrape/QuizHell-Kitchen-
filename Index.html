@@ -3,41 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>    
-<link rel="stylesheet" href="style.css">
+    <title>Quiz Kitchen</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <sections id="headerContainer">
-        <header>
-            <h1>QUIZATHON</h1>
-            <p>Click button to start the Quiz</p> 
-        </header>
-    </sections>
+    <!-- Header Section -->
+    <header id="headerContainer">
+        <h1>QUIZ KITCHEN</h1>
+        <p id="header-instructions">Click button to start the Quiz</p>
+    </header>
+
+    <!-- Game Section -->
     <section id="gameContainer">
-        <p id="Question">Question retuned from API</p>
+        <!-- Question Display -->
+        <p id="Question"></p>
         <button id="APIrender">START</button>
-        <div>
-            <img id = "faisalImage" src="" alt="">
-        </div>
-        
-        <p id="feedbackResponse"></p>
-        
-        
 
-        <div>        
-            <div>
-                <button id="trueButton">True</button>
-                <button id="falseButton">False</button>
-            </div>
-            <button  id="nextQuestion" disabled = "true" style="opacity: 0;" >NEXT QUESTION</button>
+        <!-- Feedback Image -->
+        <div id="gordonImgContainer" style="display: none;">
+            <img id="gordonImg" alt="Gordon's feedback image">
         </div>
 
-        <div id="userScore">Score = 0 out of 1 </div>
+        <!-- Answer Buttons -->
+        <fieldset>
+            <legend>Answer Options</legend>
+            <button id="trueButton">True</button>
+            <button id="falseButton">False</button>
+        </fieldset>
 
+        <!-- Next Question Button -->
+        <button id="nextQuestion" disabled style="opacity: 0;">NEXT QUESTION</button>
+
+        <!-- User Score Display -->
+        <div id="userScore" aria-live="polite"></div>
     </section>
 
+    <noscript>
+        <p>Sorry, this quiz requires JavaScript to work.</p>
+    </noscript>
 
-
-    <script src="main.js" ></script>
+    <script src="main.js"></script>
 </body>
 </html>
