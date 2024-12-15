@@ -1,20 +1,34 @@
 /*
+ * Other Ideas:
  * Images of gordon responses that you can map through
+ * **** created an array but unsure whether this should be implemnted
+ * Timer - every question or whole game?
  * works out the IQ value at the end and tells user if they are genius or not
+ *
+ *
  *
  * */
 
 //gordon images postive
-const gordonPositiveImg1 = "images/goldStarGordon.jpeg";
-const gordonPositiveImg2 = "images/you-did-it-Gordon.jpg";
+const gordonPositiveImg1 = "images/postiveGordon/goldStarGordon.jpeg";
+const gordonPostiveImg = [
+  "images/postiveGordon/goldStarGordon.jpeg",
+  "images/postiveGordon/you-did-it-Gordon.jpg",
+];
+
 //gordon images negative
-const gordonNegativeImg1 = "images/denseCabbageGordon.jpg";
-const gordonNegativeImg2 = "images/granGordon.jpeg";
+const gordonNegativeImg1 = "images/negative Gordon/denseCabbageGordon.jpg";
+const gordonNegativeImg = [
+  "images/postiveGordon/goldStarGordon.jpeg",
+  "images/postiveGordon/you-did-it-Gordon.jpg",
+  "images/postiveGordon/youDonkey.png",
+  "images/postiveGordon/fOffGetOut.png",
+  "images/postiveGordon/makingMeMad.png",
+  "images/postiveGordon/granGordon.jpeg",
+];
 
 const renderFromAPI = document.getElementById("APIrender");
-renderFromAPI;
 const headerInstructions = document.getElementById("header-instructions");
-
 const nextButton = document.getElementById("nextQuestion");
 const trueButton = document.getElementById("trueButton");
 const falseButton = document.getElementById("falseButton");
@@ -29,8 +43,10 @@ let questionElement = document.getElementById("Question");
 let score = 0;
 let num = 0;
 let questionNumTracker = 0;
+let countdownStartValue = 20;
+let countdown;
 
-async function getTenQuestions() {
+async function startGame() {
   try {
     const quizAPI = await fetch(
       "https://opentdb.com/api.php?amount=10&type=boolean&difficulty=easy"
@@ -40,16 +56,53 @@ async function getTenQuestions() {
     userScore.textContent = `Score: ${score} out of 10`;
     hideStart();
     nextQuestion();
-
+    countDownTimer(countdownStartValue);
     return quizAPIData;
   } catch {
-    console.error("ERROR found");
+    console.error(e);
   }
 }
 
 function hideStart() {
   renderFromAPI.style.display = "none";
   headerInstructions.style.display = "none";
+}
+// timer function- runs countdown of 10 secs every question
+// create timer variable or create new DOM elements with create.element
+// use setInterval() saved to intervalID so youc an use clearInterval() with the intervalId as the argument to pass later when condition has been fulfilled
+// how to go down every second countdown--?
+//when should it start? - start when startGame is called
+//what will it look like?
+
+//create timer element fucntion
+function createTimer() {
+  //setup new timer DOM element
+  const timer = document.createElement("h2");
+  const timerSpan = document.createElement("time");
+  timer.appendChild(timerSpan);
+
+  const header = document.querySelector("header");
+  header.appendChild(timer);
+
+  return timerSpan; // Return to be used later
+}
+
+function countDownTimer(countdownStartValue) {
+  //create the timer element
+  const timerSpan = createTimer();
+
+  countdown = countdownStartValue;
+  const intervalId = setInterval(() => {
+    if (countdown > 0) {
+      console.log(`Timer: ${countdown}`);
+      timerSpan.textContent = `Timer: ${countdown}`;
+      countdown--;
+    } else {
+      console.log("Time's up you DONKEY!");
+      timerSpan.textContent = `Time's up you DONKEY!`;
+      clearInterval(intervalId); // Stop the interval when countdown reaches 0
+    }
+  }, 1000);
 }
 
 function nextQuestion() {
@@ -123,7 +176,7 @@ function endGame() {
   }
 }
 
-renderFromAPI.addEventListener("click", getTenQuestions);
+renderFromAPI.addEventListener("click", startGame);
 nextButton.addEventListener("click", changeQuestion);
 trueButton.addEventListener("click", setTrue);
 falseButton.addEventListener("click", setFalse);
