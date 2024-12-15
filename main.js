@@ -1,12 +1,14 @@
 /*
  * Other Ideas:
  * Images of gordon responses that you can map through
- * **** created an array but unsure whether this should be implemnted
- * Timer - every question or whole game?
- * works out the IQ value at the end and tells user if they are genius or not
+ * **** created an array but unsure whether this should be implemnted- UNSURE PENDING
+ * Timer - every question or whole game? - DONE
  *
+ * STILL NEED TO DO:
+ * Apply styling to TIMER
+ *create a atTimerEnds function that stops the next question button,
  *
- *
+ * * works out the IQ value at the end and tells user if they are genius or not
  * */
 
 //gordon images postive
@@ -56,7 +58,7 @@ async function startGame() {
     userScore.textContent = `Score: ${score} out of 10`;
     hideStart();
     nextQuestion();
-    countDownTimer(countdownStartValue);
+    startCountDown(countdownStartValue);
     return quizAPIData;
   } catch {
     console.error(e);
@@ -67,39 +69,33 @@ function hideStart() {
   renderFromAPI.style.display = "none";
   headerInstructions.style.display = "none";
 }
-// timer function- runs countdown of 10 secs every question
-// create timer variable or create new DOM elements with create.element
-// use setInterval() saved to intervalID so youc an use clearInterval() with the intervalId as the argument to pass later when condition has been fulfilled
-// how to go down every second countdown--?
-//when should it start? - start when startGame is called
-//what will it look like?
 
-//create timer element fucntion
+//create timer element in DOM
 function createTimer() {
   //setup new timer DOM element
   const timer = document.createElement("h2");
-  const timerSpan = document.createElement("time");
-  timer.appendChild(timerSpan);
+  const timerDisplay = document.createElement("span");
+  timer.appendChild(timerDisplay);
 
   const header = document.querySelector("header");
   header.appendChild(timer);
 
-  return timerSpan; // Return to be used later
+  return timerDisplay; // Return to be used later
 }
 
-function countDownTimer(countdownStartValue) {
+function startCountDown(countdownStartValue) {
   //create the timer element
-  const timerSpan = createTimer();
+  const timerDisplay = createTimer();
 
   countdown = countdownStartValue;
   const intervalId = setInterval(() => {
     if (countdown > 0) {
       console.log(`Timer: ${countdown}`);
-      timerSpan.textContent = `Timer: ${countdown}`;
+      timerDisplay.textContent = `Timer: ${countdown}`;
       countdown--;
     } else {
       console.log("Time's up you DONKEY!");
-      timerSpan.textContent = `Time's up you DONKEY!`;
+      timerDisplay.textContent = `Time's up you DONKEY!`;
       clearInterval(intervalId); // Stop the interval when countdown reaches 0
     }
   }, 1000);
