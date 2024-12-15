@@ -124,7 +124,7 @@ button:hover {
 }
 
 button:disabled {
-    background-color: #9E9E9E; 
+    background-color: #FF3B30; 
     cursor: not-allowed;
 }
 
@@ -172,7 +172,7 @@ legend {
     margin: 20px auto;
     display: none;
     max-width: 100%;
-    width: 300px;
+    width: 400px;
 }
 
 #gordonImg {

@@ -54,6 +54,7 @@ function hideStart() {
 
 function nextQuestion() {
   if (questionNumTracker === quizAPIData.results.length) {
+    trueButton.disabled = false;
     endGame();
   } else {
     correctAnswer = quizAPIData.results[num].correct_answer;
@@ -61,6 +62,8 @@ function nextQuestion() {
     const decodedQuestion = decodeHTML(question);
     questionElement.textContent = decodedQuestion;
     questionNumTracker = num + 1;
+    trueButton.disabled = false;
+    falseButton.disabled = false;
     hideGordon();
   }
 }
@@ -90,6 +93,8 @@ function compareBool() {
     showGordon();
   }
   nextButton.disabled = false;
+  trueButton.disabled = true;
+  falseButton.disabled = true;
   nextButton.style.opacity = 1;
 }
 
